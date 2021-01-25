@@ -4,6 +4,9 @@ export EDITOR="/usr/bin/vim"
 # Default pager
 export PAGER="less"
 
+# GnuPG
+export GPG_TTY=$(tty)
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
