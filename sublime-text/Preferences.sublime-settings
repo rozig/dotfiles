@@ -1,0 +1,62 @@
+{
+	"always_show_minimap_viewport": false,
+	"bold_folder_labels": true,
+	"close_windows_when_empty": true,
+	"color_scheme": "Packages/ayu/ayu-mirage.sublime-color-scheme",
+	"draw_white_space": "all",
+	"enable_tab_scrolling": false,
+	"ensure_newline_at_eof_on_save": true,
+	"file_exclude_patterns":
+	[
+		".DS_Store",
+		"*.pid",
+		"*.pyc"
+	],
+	"folder_exclude_patterns":
+	[
+		".git",
+		"__pycache__"
+	],
+	"font_face": "Inconsolata",
+	"font_options":
+	[
+		"subpixel_antialias"
+	],
+	"font_size": 12,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"overlay_scroll_bars": "enabled",
+	"pep8_ignore":
+	[
+	],
+	"pep8_max_line_length": 119,
+	"rulers":
+	[
+		120
+	],
+	"scroll_past_end": true,
+	"show_encoding": true,
+	"show_full_path": true,
+	"show_line_endings": true,
+	"tab_completion": true,
+	"tab_size": 4,
+	"theme": "ayu-mirage.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"ui_big_tabs": true,
+	"ui_font_default": true,
+	"ui_font_size_medium": true,
+	"ui_font_source_code_pro": true,
+	"ui_separator": true,
+	"ui_wide_scrollbars": true,
+	"word_wrap": true
+}

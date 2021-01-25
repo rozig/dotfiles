@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Anaconda",
+		"ayu",
+		"Babel",
+		"BracketHighlighter",
+		"DocBlockr",
+		"Emmet",
+		"GitGutter",
+		"Go To Definition",
+		"LaTeXTools",
+		"Package Control",
+		"React IDE",
+		"SideBarEnhancements",
+		"SublimeLinter"
+	]
+}
