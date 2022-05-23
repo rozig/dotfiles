@@ -1,4 +1,6 @@
 [
     { "keys": ["ctrl+tab"], "command": "next_view" },
     { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+    { "keys": [ "ctrl+alt+m" ], "command": "un_pretty_json" },
+    { "keys": [ "ctrl+alt+f" ], "command": "pretty_json" }
 ]
