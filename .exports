@@ -1,5 +1,5 @@
 # Default editor
-export EDITOR="/usr/bin/vim"
+export EDITOR="/usr/bin/local/nvim"
 
 # Default pager
 export PAGER="less"
@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # System path
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Terminal colors

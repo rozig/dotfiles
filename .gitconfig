@@ -14,3 +14,15 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[alias]
+	co = checkout
+	st = status
+	br = branch
+[push]
+	default = simple
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[grep]
+	lineNumber = true
