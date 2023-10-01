@@ -43,3 +43,7 @@ export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
 export LESS_TERMCAP_se=$'\e[0m' # End standout mode
 export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
 export LESS_TERMCAP_ue=$'\e[0m' # End underline
+
+# OpenSSL
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
