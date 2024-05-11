@@ -17,7 +17,7 @@
 		".git",
 		"__pycache__"
 	],
-	"font_face": "Inconsolata",
+	"font_face": "Hack",
 	"font_options":
 	[
 		"subpixel_antialias"
@@ -51,12 +51,12 @@
 	"tab_size": 4,
 	"theme": "ayu-mirage.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
+	"trim_trailing_white_space_on_save": "all",
 	"ui_big_tabs": true,
 	"ui_font_default": true,
 	"ui_font_size_medium": true,
 	"ui_font_source_code_pro": true,
 	"ui_separator": true,
 	"ui_wide_scrollbars": true,
-	"word_wrap": true
+	"word_wrap": true,
 }

@@ -1,0 +1,47 @@
+[alias]
+	co = checkout
+	st = status
+  br = branch
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = true
+
+[commit]
+	gpgsign = true
+
+[core]
+	editor = nvim
+	excludesfile = $HOME/.gitignore
+
+[fetch]
+	prune = true
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[gpg]
+	program = gpg
+
+[grep]
+  lineNumber = true
+
+[hub]
+  protocol = https
+
+[pull]
+	rebase = true
+
+[push]
+	default = simple
+
+[user]
+	signingkey = C09D284EB3830930
+	email = the.ganzorig25@gmail.com
+	name = Ganzorig Erdenebat
+
