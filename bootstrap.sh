@@ -23,6 +23,22 @@ install_homebrew_and_deps () {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
+config_gnupg () {
+  echo "Configuring gnupg"
+  home_path="$DOTFILES_ROOT/.config/gnupg"
+  if [ ! -d $home_path ]; then
+    mkdir $home_path
+    chmod 700 $home_path
+  fi
+
+  ln -s "$ROOT/gnupg/gpg.conf" "$home_path/gpg.conf"
+  ln -s "$ROOT/gnupg/gpg-agent.conf" "$home_path/gpg-agent.conf"
+  chmod 600 "$home_path/gpg.conf"
+  chmod 600 "$home_path/gpg-agent.conf"
+
+  echo "gnupg configured"
+}
+
 change_default_shell_to_zsh () {
   if [ ! "$(command -v zsh)" &> /dev/null ]; then
     chsh -s $(which zsh)

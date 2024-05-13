@@ -16,6 +16,7 @@ export LSCOLORS="ExFxBxDxCxegedabagacad"
 export PAGER="less"
 
 # GnuPG
+export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export GPG_TTY=$(tty)
 
 # Less
