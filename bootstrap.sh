@@ -5,7 +5,7 @@ CONFIGS_TO_SETUP=("git" "nvim" "tmux" "zsh" "ripgrep")
 
 set -e
 
-install_homebrew () {
+install_homebrew_and_deps () {
   if [ ! "$(command -v brew)" &> /dev/null ]; then
     echo "Installing homebrew ..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -18,6 +18,9 @@ install_homebrew () {
 
   # Install dependencies from Brewfile
   brew bundle
+
+  # Install tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 change_default_shell_to_zsh () {
