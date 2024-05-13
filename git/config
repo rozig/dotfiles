@@ -14,7 +14,6 @@
 
 [core]
 	editor = nvim
-	excludesfile = $HOME/.gitignore
 
 [fetch]
 	prune = true
