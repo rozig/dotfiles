@@ -1,0 +1,8 @@
+# Limit output
+--max-columns=150
+--max-columns-preview
+
+# Glob patterns to ignore
+--glob
+!.git/*
+
