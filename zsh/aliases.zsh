@@ -10,7 +10,9 @@ alias mkdir="mkdir -v"
 alias rm="rm -i"
 alias rmf="rm -rf"
 alias grep="grep --color=auto"
-alias tmux='tmux -f "$HOME/.config/tmux/init.conf"'
+alias vim="nvim"
+alias tmux='tmux -f "$XDG_CONFIG_HOME/tmux/init.conf"'
+alias k="kubectl"
 
 function lk {
   cd "$(walk "$@" --icons)"
