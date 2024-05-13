@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ROOT="$(pwd -P)"
 DOTFILES_ROOT="$ROOT/.."
-CONFIGS_TO_SETUP=("nvim" "tmux" "zsh")
+CONFIGS_TO_SETUP=("git" "nvim" "tmux" "zsh" "ripgrep")
 
 set -e
 
@@ -20,9 +20,17 @@ install_homebrew () {
   brew bundle
 }
 
+change_default_shell_to_zsh () {
+  if [ ! "$(command -v zsh)" &> /dev/null ]; then
+    chsh -s $(which zsh)
+    "Default shell changed to zsh"
+  else
+    "Default shell is already zsh"
+  fi
+}
+
 setup_dotfiles () {
   echo "Setting up dotfiles"
-
 
   if [ ! -d "$DOTFILES_ROOT/.config" ]; then
     mkdir "$DOTFILES_ROOT/.config"
@@ -35,10 +43,13 @@ setup_dotfiles () {
     echo "Configuring $dir ..."
 
     if [ -d "$dst" ]; then
-      echo "$dir already configured, do you want to override? [y]es, [n]o: "
+      echo "$dir already configured, do you want to override? [y]es, [b]ackup, [n]o: "
       read -n 1 override
 
       if [ "$override" == "y" ]; then
+        ln -sf "$src" "$dst"
+      elif [ "$override" == "b" ]; then
+        mv "$dst" "$dst.bk"
         ln -sf "$src" "$dst"
       else
         echo "Skipping $dir"
@@ -55,21 +66,24 @@ setup_dotfiles () {
 main () {
   if [ "$(uname -s)" == "Darwin" ]; then
     # Set macOS defaults
-    # /bin/bash scripts/set_mac_defaults.sh
+    /bin/bash scripts/set_macos_defaults.sh
 
     # symlink root level dotfiles
-    for file in $(find -H "global" -type f); do
+    for file in $(find -H . -type f -name "*.symlink"); do
       base_file_name="$(basename "$file")"
       src="$ROOT/$file"
-      dst="$DOTFILES_ROOT/$base_file_name"
+      dst="$DOTFILES_ROOT/${base_file_name%.*}"
 
       echo "Linking $base_file_name in home directory ..."
 
       if [ -f "$dst" ]; then
-        echo "$base_file_name already exists in home directory, do you want to override? [y]es, [n]o: "
+        echo "$base_file_name already exists in home directory, do you want to override? [y]es, [b]ack up, [n]o: "
         read -n 1 override
 
         if [ $override == "y" ]; then
+          ln -sf "$src" "$dst"
+        elif [ $override == "b" ]; then
+          mv "$dst" "$dst.bk"
           ln -sf "$src" "$dst"
         else
           echo "Skipping $base_file_name"
@@ -82,11 +96,15 @@ main () {
       echo "Linked $file to $dst"
     done
 
-    # Install homebrew
-    # install_homebrew
+    # Install homebrew and bundle
+    install_homebrew_and_deps
+
   else
     echo "OS not supported"
   fi
+
+  # Change default shell to zsh
+  change_default_shell_to_zsh
 
   # Setup dotfiles
   setup_dotfiles
