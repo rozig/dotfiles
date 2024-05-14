@@ -17,3 +17,7 @@ alias k="kubectl"
 function lk {
   cd "$(walk "$@" --icons)"
 }
+
+function gen-ssh-key {
+  ssh-keygen -t ed25519 $@
+}

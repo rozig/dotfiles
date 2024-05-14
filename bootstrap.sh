@@ -13,11 +13,11 @@ install_homebrew_and_deps () {
     echo "homebrew already exists"
   fi
 
-  # Update brew recipes
+  # Update brew recipes and install deps
   brew update
-
-  # Install dependencies from Brewfile
   brew bundle
+  brew cleanup --prune=all
+  brew doctor
 
   # Install tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

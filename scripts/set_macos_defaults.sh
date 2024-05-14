@@ -36,3 +36,5 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `glyv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+killall Finder
