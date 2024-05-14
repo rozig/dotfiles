@@ -22,5 +22,7 @@ cd ~/dotfiles
 ```
 
 ## Acknowledgements
- - The main structure of the repo and the bootstrap script are heavily inspired from [@holman](https://github.com/holman)'s [dotfiles repo](https://github.com/holman)
- - and all macOS default configurations were taken from [@mathiasbynens](https://github.com/mathiasbynens)'s great list of [Sensible macOS defaults](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+ - The main structure of the repo and the bootstrap script are inspired by [@holman](https://github.com/holman)'s [dotfiles repo](https://github.com/holman)
+ - and all macOS default configurations are taken from [@mathiasbynens](https://github.com/mathiasbynens)'s great list of [Sensible macOS defaults](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+ - nvim config structure is inspired by [@ThePrimeagen](https://github.com/ThePrimeagen)'s [init.lua](https://github.com/ThePrimeagen/init.lua)
+ - nvim configurations are mostly inspired by [@tjdevries](https://github.com/tjdevries)'s [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
