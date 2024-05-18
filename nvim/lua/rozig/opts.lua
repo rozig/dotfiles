@@ -20,6 +20,7 @@ opt.updatetime = 200
 opt.inccommand = "split"
 opt.cursorline = true
 opt.scrolloff = 10
+opt.guicursor = "n-v-i-c:block-Cursor"
 
 -- Tab
 opt.tabstop = 2
