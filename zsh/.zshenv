@@ -28,6 +28,7 @@ export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 # System paths
 export PATH="/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Setup custom config directories
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
