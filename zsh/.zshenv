@@ -1,10 +1,3 @@
-# Setup custom config directories
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
-
-# System path
-export PATH="/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
 # Default editor
 export EDITOR="$(which nvim)"
 
@@ -16,7 +9,6 @@ export LSCOLORS="ExFxBxDxCxegedabagacad"
 export PAGER="less"
 
 # GnuPG
-export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 export GPG_TTY=$(tty)
 
 # Less
@@ -28,9 +20,18 @@ export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
 export LESS_TERMCAP_se=$'\e[0m' # End standout mode
 export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
 export LESS_TERMCAP_ue=$'\e[0m' # End underline
+
 # OpenSSL
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+# System paths
+export PATH="/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Setup custom config directories
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # Golang
 export GOROOT="/usr/local/go"

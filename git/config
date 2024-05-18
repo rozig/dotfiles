@@ -2,12 +2,19 @@
 	co = checkout
 	st = status
   br = branch
+  pushf = push --force-with-lease
+
+[branch]
+	sort = --committerdate
 
 [color]
   diff = auto
   status = auto
   branch = auto
   ui = true
+
+[column]
+	ui = auto
 
 [commit]
 	gpgsign = true
@@ -43,4 +50,3 @@
 	signingkey = C09D284EB3830930
 	email = the.ganzorig25@gmail.com
 	name = Ganzorig Erdenebat
-
