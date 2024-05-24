@@ -1,0 +1,4 @@
+[keyboard]
+bindings = [
+  { key = "M", mods = "Control|Shift", action = "ToggleViMode" },
+]
