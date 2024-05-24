@@ -9,6 +9,9 @@ PROMPT="%B%F{yellow}%n%f%b%B@%b%B%F{green}%m%f%b%B:%b%B%F{cyan}%~%f%b %(!.%B#%b.
 
 export HISTORY_IGNORE="([bf]g|c|clear|e|exit|h|history|incognito|l|l[adfls]|pwd|z)"
 
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
 # Load other zsh configs
 for config in $(find -H "${XDG_CONFIG_HOME:-$HOME/.config}/zsh" -type f -name "*.zsh"); do
   source $config
