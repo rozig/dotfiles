@@ -4,10 +4,13 @@ compinit
 # Disable auto terminal title
 DISABLE_AUTO_TITLE="true"
 
-# Prompt formatting: (username@host:current_path $/#)
-PROMPT="%B%F{yellow}%n%f%b%B@%b%B%F{green}%m%f%b%B:%b%B%F{cyan}%~%f%b %(!.%B#%b.%B$%b) "
+# History configuration
+HISTORY_IGNORE="([bf]g|c|clear|e|exit|h|history|incognito|l|l[adfls]|pwd|z)"
+HISTFILE="$ZDOTDIR/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
 
-export HISTORY_IGNORE="([bf]g|c|clear|e|exit|h|history|incognito|l|l[adfls]|pwd|z)"
+setopt SHARE_HISTORY
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
