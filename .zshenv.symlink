@@ -4,4 +4,3 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Configure $ZDOTDIR
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source "$ZDOTDIR/.zshenv"
-alias kubectl="minikube kubectl --"

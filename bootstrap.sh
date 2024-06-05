@@ -26,9 +26,6 @@ install_homebrew_and_deps () {
   if [ -f "$DOTFILES_ROOT/Brewfile" ]; then
     rm "$DOTFILES_ROOT/Brewfile"
   fi
-
-  # Install tpm
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 config_gnupg () {
@@ -88,6 +85,9 @@ setup_dotfiles () {
 
     echo "Configured $dir"
   done
+
+  # Install tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 create_symlinks () {
