@@ -13,11 +13,19 @@ install_homebrew_and_deps () {
     echo "homebrew already exists"
   fi
 
+  if [ ! -f "$DOTFILES_ROOT/Brewfile" ]; then
+    ln -s "$ROOT/Brewfile.macos" "$DOTFILES_ROOT/Brewfile"
+  fi
+
   # Update brew recipes and install deps
   brew update
   brew bundle
   brew cleanup --prune=all
   brew doctor
+
+  if [ -f "$DOTFILES_ROOT/Brewfile" ]; then
+    rm "$DOTFILES_ROOT/Brewfile"
+  fi
 
   # Install tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -42,9 +50,9 @@ config_gnupg () {
 change_default_shell_to_zsh () {
   if [ ! "$(command -v zsh)" &> /dev/null ]; then
     chsh -s $(which zsh)
-    "Default shell changed to zsh"
+    echo "Default shell changed to zsh"
   else
-    "Default shell is already zsh"
+    echo "Default shell is already zsh"
   fi
 }
 
@@ -82,44 +90,46 @@ setup_dotfiles () {
   done
 }
 
+create_symlinks () {
+  for file in $(find -H . -type f -name "*.symlink"); do
+    base_file_name="$(basename "$file")"
+    src="$ROOT/$file"
+    dst="$DOTFILES_ROOT/${base_file_name%.*}"
+
+    echo "Linking $base_file_name in home directory ..."
+
+    if [ -f "$dst" ]; then
+      echo "$base_file_name already exists in home directory, do you want to override? [y]es, [b]ack up, [n]o: "
+      read -n 1 override
+
+      if [ $override == "y" ]; then
+        ln -sf "$src" "$dst"
+      elif [ $override == "b" ]; then
+        mv "$dst" "$dst.bk"
+        ln -sf "$src" "$dst"
+      else
+        echo "Skipping $base_file_name"
+        continue
+      fi
+    else
+      ln -s "$src" "$dst"
+    fi
+
+    echo "Linked $file to $dst"
+  done
+}
+
 main () {
+  # symlink root level dotfiles
+  create_symlinks
+
   if [ "$(uname -s)" == "Darwin" ]; then
     # Set macOS defaults
     /bin/bash scripts/set_macos_defaults.sh
 
-    # symlink root level dotfiles
-    for file in $(find -H . -type f -name "*.symlink"); do
-      base_file_name="$(basename "$file")"
-      src="$ROOT/$file"
-      dst="$DOTFILES_ROOT/${base_file_name%.*}"
-
-      echo "Linking $base_file_name in home directory ..."
-
-      if [ -f "$dst" ]; then
-        echo "$base_file_name already exists in home directory, do you want to override? [y]es, [b]ack up, [n]o: "
-        read -n 1 override
-
-        if [ $override == "y" ]; then
-          ln -sf "$src" "$dst"
-        elif [ $override == "b" ]; then
-          mv "$dst" "$dst.bk"
-          ln -sf "$src" "$dst"
-        else
-          echo "Skipping $base_file_name"
-          continue
-        fi
-      else
-        ln -s "$src" "$dst"
-      fi
-
-      echo "Linked $file to $dst"
-    done
-
     # Install homebrew and bundle
     install_homebrew_and_deps
-
-  else
-    echo "OS not supported"
+  # elif [ "$(uname -s)" == "Linux" ]; then
   fi
 
   # Change default shell to zsh
@@ -127,6 +137,9 @@ main () {
 
   # Setup dotfiles
   setup_dotfiles
+
+  # Config gnupg
+  config_gnupg
 }
 
 main

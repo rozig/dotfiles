@@ -21,4 +21,6 @@ for config in $(find -H "${XDG_CONFIG_HOME:-$HOME/.config}/zsh" -type f -name "*
 done
 
 # Enable kubectl zsh auto-completion
-source <(kubectl completion zsh)
+if [ command -v kubectl &> /dev/null ]; then
+  source <(kubectl completion zsh)
+fi
