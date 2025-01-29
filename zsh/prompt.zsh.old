@@ -4,6 +4,24 @@ precmd() {
     vcs_info
 }
 
+__k8s_info() {
+  CTX=$(kubectl config view -o json | jq -r '."current-context"')
+  NS=$(kubectl config view -o json | jq -r 'try .contexts[] | select(.name == "'$CTX'").context.namespace // ""')
+
+  INFO=""
+  if [ -n "$CTX" ]; then
+    INFO+="$CTX"
+  fi
+
+  if [ -n "$NS" ]; then
+    INFO+=":$NS"
+  fi
+
+  if [ -n "$INFO" ]; then
+    echo "k8s:[ $INFO ] "
+  fi
+}
+
 # VCS configuration
 setopt PROMPT_SUBST
 zstyle ':vcs_info:*' enable git
@@ -27,7 +45,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 # Prompt formatting: (username@host:current_path ?[git_branch] $/#)
-PS1='%B%F{yellow}%n%f'       # user
+PS1='%F{blue}$(__k8s_info)%f'        # k8s
+PS1+='%B%F{yellow}%n%f'       # user
 PS1+='@%F{green}%m%f'        # host
 PS1+=':%F{cyan}%~%f'         # cwd
 PS1+=' ${vcs_info_msg_0_}'   # VCS

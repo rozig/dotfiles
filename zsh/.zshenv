@@ -43,3 +43,7 @@ export PATH="$GOPATH/bin:$PATH"
 if [ -f "$HOME/.cargo/env" ]; then
   source "$HOME/.cargo/env"
 fi
+
+# Krew
+export KREW_ROOT="$XDG_CONFIG_HOME/.krew"
+export PATH="$KREW_ROOT/bin:$PATH"

@@ -12,7 +12,10 @@ alias rmf="rm -rf"
 alias grep="grep --color=auto"
 alias vim="nvim"
 alias tmux='tmux -f "$XDG_CONFIG_HOME/tmux/init.conf"'
+
+# kubectl aliases
 alias k="kubectl"
+alias decode_secret="kubectl get secret -o go-template='{{range \$k,\$v := .data}}{{printf \"%s: \" \$k}}{{if not \$v}}{{\$v}}{{else}}{{\$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'"
 
 function lk {
   cd "$(walk "$@" --icons)"

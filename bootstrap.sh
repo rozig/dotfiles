@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ROOT="$(pwd -P)"
 DOTFILES_ROOT="$ROOT/.."
-CONFIGS_TO_SETUP=("git" "nvim" "tmux" "zsh" "ripgrep" "fastfetch")
+CONFIGS_TO_SETUP=("alacritty" "fastfetch" "git" "nvim" "powerlevel10k" "ripgrep" "tmux" "zsh")
 
 set -e
 
