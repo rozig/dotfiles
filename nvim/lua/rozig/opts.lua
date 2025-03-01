@@ -10,6 +10,7 @@ g.netrw_winsize = 25
 
 -- General
 opt.termguicolors = true
+opt.relativenumber = true
 opt.number = true
 opt.mouse = ""
 opt.wrap = true

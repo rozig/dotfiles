@@ -157,7 +157,46 @@ return {
     --    For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       -- clangd = {},
-      gopls = {},
+      gopls = {
+        keys = {
+          { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
+        },
+        settings = {
+          gopls = {
+            codelenses = {
+              gc_details = false,
+              generate = true,
+              regenerate_cgo = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              fieldalignment = true,
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+            usePlaceholders = false,
+            completeUnimported = true,
+            staticcheck = true,
+            directoryFilters = { "-.git", "-node_modules" },
+            semanticTokens = true,
+          },
+        },
+      },
       -- pyright = {},
       rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -206,6 +245,8 @@ return {
       "stylua", -- Used to format Lua code
       "isort",
       "black",
+
+      "goimports",
     })
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

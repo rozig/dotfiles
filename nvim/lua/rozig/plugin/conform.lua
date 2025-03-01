@@ -34,7 +34,7 @@ return {
     end,
     formatters_by_ft = {
       elixir = { "mix" },
-      go = { "gofmt" },
+      go = { "goimports", "gofmt" },
       javascript = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
       css = { { "prettierd", "prettier" } },
