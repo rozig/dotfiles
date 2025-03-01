@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-ROOT="$(pwd -P)"
-DOTFILES_ROOT="$ROOT/.."
+
+HOME_DIR="$(eval echo ~$USER)"
+CONFIG_DIR="$HOME_DIR/.config"
+REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
 CONFIGS_TO_SETUP=("alacritty" "fastfetch" "git" "nvim" "powerlevel10k" "ripgrep" "tmux" "zsh")
 
 set -e
@@ -13,33 +16,34 @@ install_homebrew_and_deps () {
     echo "homebrew already exists"
   fi
 
-  if [ ! -f "$DOTFILES_ROOT/Brewfile" ]; then
-    ln -s "$ROOT/Brewfile.macos" "$DOTFILES_ROOT/Brewfile"
-  fi
-
   # Update brew recipes and install deps
   brew update
-  brew bundle
-  brew cleanup --prune=all
-  brew doctor
 
-  if [ -f "$DOTFILES_ROOT/Brewfile" ]; then
-    rm "$DOTFILES_ROOT/Brewfile"
+  if [ ! -f "$HOME_DIR/Brewfile" ]; then
+    ln -s "$REPO_ROOT/Brewfile.macos" "$HOME_DIR/Brewfile"
+    brew bundle
+  fi
+
+  brew upgrade
+  brew cleanup --prune=all
+
+  if [ -f "$HOME_DIR/Brewfile" ]; then
+    rm "$HOME_DIR/Brewfile"
   fi
 }
 
 config_gnupg () {
   echo "Configuring gnupg"
-  home_path="$DOTFILES_ROOT/.config/gnupg"
-  if [ ! -d $home_path ]; then
-    mkdir $home_path
-    chmod 700 $home_path
+  gpg_path="$CONFIG_DIR/gnupg"
+  if [ ! -d $gpg_path ]; then
+    mkdir $gpg_path
+    chmod 700 $gpg_path
   fi
 
-  ln -s "$ROOT/gnupg/gpg.conf" "$home_path/gpg.conf"
-  ln -s "$ROOT/gnupg/gpg-agent.conf" "$home_path/gpg-agent.conf"
-  chmod 600 "$home_path/gpg.conf"
-  chmod 600 "$home_path/gpg-agent.conf"
+  ln -s "$REPO_ROOT/gnupg/gpg.conf" "$gpg_path/gpg.conf"
+  ln -s "$REPO_ROOT/gnupg/gpg-agent.conf" "$gpg_path/gpg-agent.conf"
+  chmod 600 "$gpg_path/gpg.conf"
+  chmod 600 "$gpg_path/gpg-agent.conf"
 
   echo "gnupg configured"
 }
@@ -56,45 +60,49 @@ change_default_shell_to_zsh () {
 setup_dotfiles () {
   echo "Setting up dotfiles"
 
-  if [ ! -d "$DOTFILES_ROOT/.config" ]; then
-    mkdir "$DOTFILES_ROOT/.config"
+  if [ ! -d "$CONFIG_DIR" ]; then
+    mkdir "$CONFIG_DIR"
   fi
   
-  for dir in "${CONFIGS_TO_SETUP[@]}"; do
-    src="$ROOT/$dir"
-    dst="$DOTFILES_ROOT/.config/$dir"
+  for app in "${CONFIGS_TO_SETUP[@]}"; do
+    src="$REPO_ROOT/$app"
+    dst="$CONFIG_DIR/$app"
     
-    echo "Configuring $dir ..."
+    echo "Configuring $app ..."
 
     if [ -d "$dst" ]; then
-      echo "$dir already configured, do you want to override? [y]es, [b]ackup, [n]o: "
+      echo "$app already configured, do you want to override? [y]es, [b]ackup, [n]o: "
       read -n 1 override
 
       if [ "$override" == "y" ]; then
+        # stow -v -R -t "$CONFIG_DIR" "$app"
         ln -sf "$src" "$dst"
       elif [ "$override" == "b" ]; then
         mv "$dst" "$dst.bk"
-        ln -sf "$src" "$dst"
+        # stow -v -R -t "$CONFIG_DIR" "$app"
+        ln -s "$src" "$dst"
       else
-        echo "Skipping $dir"
+        echo "Skipping $app"
         continue
       fi
     else
+      # stow -v -R -t "$CONFIG_DIR" "$app"
       ln -s "$src" "$dst"
     fi
 
     echo "Configured $dir"
   done
 
-  # Install tpm
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  echo "Installing tpm plugins ..."
+  "$CONFIG_DIR/tmux/plugins/tpm/bin/install_plugins"
+  echo "Installed tpm plugins"
 }
 
 create_symlinks () {
   for file in $(find -H . -type f -name "*.symlink"); do
     base_file_name="$(basename "$file")"
-    src="$ROOT/$file"
-    dst="$DOTFILES_ROOT/${base_file_name%.*}"
+    src="$REPO_ROOT/$file"
+    dst="$HOME_DIR/${base_file_name%.*}"
 
     echo "Linking $base_file_name in home directory ..."
 
@@ -120,12 +128,15 @@ create_symlinks () {
 }
 
 main () {
-  # symlink root level dotfiles
-  create_symlinks
+  last_active_dir="$(pwd -P)"
+  cd $REPO_ROOT
+
+  git submodule init
+  git submodule update
 
   if [ "$(uname -s)" == "Darwin" ]; then
     # Set macOS defaults
-    /bin/bash scripts/set_macos_defaults.sh
+    "scripts/set_macos_defaults.sh"
 
     # Install homebrew and bundle
     install_homebrew_and_deps
@@ -140,6 +151,8 @@ main () {
 
   # Config gnupg
   config_gnupg
+
+  cd $last_active_dir
 }
 
 main
