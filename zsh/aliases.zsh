@@ -11,7 +11,6 @@ alias rm="rm -i"
 alias rmf="rm -rf"
 alias grep="grep --color=auto"
 alias vim="nvim"
-alias tmux='tmux -f "$XDG_CONFIG_HOME/tmux/init.conf"'
 
 # kubectl aliases
 alias k="kubectl"
