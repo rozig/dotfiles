@@ -14,7 +14,10 @@ alias vim="nvim"
 
 # kubectl aliases
 alias k="kubectl"
-alias decode_secret="kubectl get secret -o go-template='{{range \$k,\$v := .data}}{{printf \"%s: \" \$k}}{{if not \$v}}{{\$v}}{{else}}{{\$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'"
+alias view-secret="kubectl get secret -o go-template='{{range \$k,\$v := .data}}{{printf \"%s: \" \$k}}{{if not \$v}}{{\$v}}{{else}}{{\$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'"
+function kdebug() {
+  kubectl debug "$1/$2" -it --image=ubuntu --profile=general bash
+}
 
 function lk {
   cd "$(walk "$@" --icons)"

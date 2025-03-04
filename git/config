@@ -3,9 +3,10 @@
 	st = status
   br = branch
   pushf = push --force-with-lease
+  undo = reset --soft @{1}
 
 [branch]
-	sort = --committerdate
+	sort = -committerdate
 
 [color]
   diff = auto
@@ -18,12 +19,22 @@
 
 [commit]
 	gpgsign = true
+  verbose = true
 
 [core]
 	editor = nvim
+  excludesfile = $XDG_CONFIG_HOME/git/ignore
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 
 [fetch]
 	prune = true
+  pruneTags = true
+  all = true
 
 [filter "lfs"]
 	required = true
@@ -37,14 +48,34 @@
 [grep]
   lineNumber = true
 
+[help]
+  autocorrect = prompt
+
 [hub]
   protocol = https
+
+[init]
+  defaultBranch = main
 
 [pull]
 	rebase = true
 
 [push]
 	default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[tag]
+  sort = version:refname
 
 [user]
 	signingkey = C09D284EB3830930

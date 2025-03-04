@@ -94,9 +94,9 @@
   # Default prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯'
   # Prompt symbol in command vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION=''
   # Prompt symbol in visual vi mode is the same as in command mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='❮'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION=''
   # Prompt symbol in overwrite vi mode is the same as in command mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
 
@@ -264,7 +264,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
 
   # Instant prompt mode.
   #
