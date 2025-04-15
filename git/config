@@ -4,6 +4,7 @@
   br = branch
   pushf = push --force-with-lease
   undo = reset --soft @{1}
+  fp = fetch origin -p
 
 [branch]
 	sort = -committerdate
@@ -81,3 +82,6 @@
 	signingkey = C09D284EB3830930
 	email = the.ganzorig25@gmail.com
 	name = Ganzorig Erdenebat
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/

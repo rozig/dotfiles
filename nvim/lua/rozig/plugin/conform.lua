@@ -13,10 +13,27 @@ return {
       mode = "",
       desc = "[F]ormat buffer",
     },
+    {
+      "<leader>tf",
+      function()
+        if vim.b.disable_autoformat then
+          vim.cmd("FormatEnable")
+          vim.notify("Enabled autoformat for current buffer")
+        else
+          vim.cmd("FormatDisable!")
+          vim.notify("Disabled autoformat for current buffer")
+        end
+      end,
+      desc = "Toggle auto-[f]ormat for current buffer",
+    },
   },
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+      end
+
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
@@ -47,4 +64,27 @@ return {
       rust = { "rustfmt" },
     },
   },
+  config = function(_, opts)
+    require("conform").setup(opts)
+
+    vim.api.nvim_create_user_command("FormatDisable", function(args)
+      if args.bang then
+        -- :FormatDisable! disables autoformat for this buffer only
+        vim.b.disable_autoformat = true
+      else
+        -- :FormatDisable disables autoformat globally
+        vim.g.disable_autoformat = true
+      end
+    end, {
+      desc = "Disable auto-format on save",
+      bang = true, -- allows the ! variant
+    })
+
+    vim.api.nvim_create_user_command("FormatEnable", function()
+      vim.b.disable_autoformat = false
+      vim.g.disable_autoformat = false
+    end, {
+      desc = "Enable auto-format on save",
+    })
+  end,
 }
