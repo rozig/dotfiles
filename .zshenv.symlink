@@ -1,6 +1,9 @@
 # Define $XDG_CONFIG_HOME
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# Define $DOT
+export DOT="$HOME/dotfiles"
+
 # Configure $ZDOTDIR
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source "$ZDOTDIR/.zshenv"

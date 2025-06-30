@@ -36,6 +36,17 @@ if [ command -v kubectl &> /dev/null ]; then
   source <(kubectl completion zsh)
 fi
 
+# Enable 1Password zsh auto-completion
+if [ command -v op &> /dev/null ]; then
+  eval "$(op completion zsh)"; compdef _op op
+fi
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/rozig/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
 # Plugins
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-autosuggestions
