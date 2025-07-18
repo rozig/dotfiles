@@ -10,5 +10,5 @@ fi
 
 # Set up fzf key bindings and fuzzy completion
 if [ command -v fzf &> /dev/null ]; then
-  eval "$(fzf --zsh)"
+  source <(fzf --zsh)
 fi

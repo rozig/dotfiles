@@ -29,6 +29,7 @@ export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PATH="/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Setup custom config directories
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
@@ -47,3 +48,12 @@ fi
 # Krew
 export KREW_ROOT="$XDG_CONFIG_HOME/.krew"
 export PATH="$KREW_ROOT/bin:$PATH"
+
+# fd
+FD_OPTIONS="--follow --exclude .git"
+
+# fzf
+export FZF_DEFAULT_COMMAND="fd --type f --type l --strip-cwd-prefix --hidden $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+export FZF_DEFAULT_OPTS=""

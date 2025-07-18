@@ -20,5 +20,4 @@ keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window"
 keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Netrw
-keymap.set("n", "<leader>dd", "<cmd>Lexplore %:p:h<CR>", { desc = "Netrw: Open netrw in current file's directory" })
-keymap.set("n", "<leader>da", "<cmd>Lexplore<CR>", { desc = "Netrw: Open netrw in current directory" })
+keymap.set("n", "<leader>do", "<cmd>Oil<CR>", { desc = "[O]il.nvim in current file's directory" })
