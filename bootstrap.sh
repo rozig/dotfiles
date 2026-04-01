@@ -4,7 +4,7 @@ HOME_DIR="$(eval echo ~$USER)"
 CONFIG_DIR="$HOME_DIR/.config"
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-CONFIGS_TO_SETUP=("alacritty" "fastfetch" "git" "nvim" "powerlevel10k" "ripgrep" "tmux" "zsh")
+CONFIGS_TO_SETUP=("alacritty" "ghostty" "fastfetch" "git" "nvim" "powerlevel10k" "ripgrep" "tmux" "zsh")
 
 set -e
 

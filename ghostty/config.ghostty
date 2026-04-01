@@ -1,0 +1,16 @@
+theme = Nordfox
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+font-family = "Hack Nerd Font Mono"
+font-family-bold = "Hack Nerd Font Mono Bold"
+font-family-italic = "Hack Nerd Font Mono Italic"
+font-family-bold-italic = "Hack Nerd Font Mono Bold Italic"
+font-size = 14.0
+font-thicken = true
+
+window-padding-x = 5
+window-padding-y = 5
+macos-icon = xray

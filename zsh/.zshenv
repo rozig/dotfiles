@@ -1,3 +1,6 @@
+# TERM
+export TERM="xterm-256color"
+
 # Default editor
 export EDITOR="$(which nvim)"
 
@@ -36,7 +39,6 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # Golang
-export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 

@@ -11,10 +11,11 @@ alias rm="rm -i"
 alias rmf="rm -rf"
 alias grep="grep --color=auto"
 alias vim="nvim"
+alias cat="bat -pn --paging=always --theme-dark=Nord"
 
 # kubectl aliases
-alias k="kubectl"
-alias view-secret="kubectl get secret -o go-template='{{range \$k,\$v := .data}}{{printf \"%s: \" \$k}}{{if not \$v}}{{\$v}}{{else}}{{\$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'"
+alias k="kubecolor"
+alias view-secret="kubecolor get secret -o go-template='{{range \$k,\$v := .data}}{{printf \"%s: \" \$k}}{{if not \$v}}{{\$v}}{{else}}{{\$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'"
 function kdebug() {
   kubectl debug "$1/$2" -it --image=ubuntu --profile=general bash
 }

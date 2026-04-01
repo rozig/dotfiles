@@ -27,27 +27,7 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 typeset -a ANTIGEN_CHECK_FILES=(${ZDOTDIR:-~}/.zshrc ${ZDOTDIR:-~}/antigen.zsh)
-
-# Load other zsh configs
-for config in $(find -H "${XDG_CONFIG_HOME:-$HOME/.config}/zsh" -type f -name "*.zsh"); do
-  source $config
-done
-
-# Enable kubectl zsh auto-completion
-if [ command -v kubectl &> /dev/null ]; then
-  source <(kubectl completion zsh)
-fi
-
-# Enable 1Password zsh auto-completion
-if [ command -v op &> /dev/null ]; then
-  eval "$(op completion zsh)"; compdef _op op
-fi
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/rozig/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/antigen.zsh"
 
 # Plugins
 antigen bundle Aloxaf/fzf-tab
@@ -78,4 +58,9 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
 # tmux support
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-command fzf
+
+# Load other zsh configs
+for config in $(find -H "${XDG_CONFIG_HOME:-$HOME/.config}/zsh" -type f -name "*.zsh" ! -name "antigen.zsh"); do
+  source $config
+done
